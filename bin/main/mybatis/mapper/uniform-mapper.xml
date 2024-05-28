@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.green.uniform.dao.Iuniformdao">
+  
+	<!-- 회원가입 -->
+  	<insert id="regist">
+  		insert into membertbl(name, username, userpw, phone, addr, role)
+		values(#{name}, #{username}, #{userpw}, #{phone}, #{addr}, #{role})
+  	</insert>
+  
+  	<!-- 로그인 -->	
+  	<select id="login" resultType="com.green.uniform.dto.MemberDto">
+  		SELECT username, userpw, role FROM membertbl
+  		WHERE username = #{username} and userpw = #{userpw}
+  	</select>
+  	
+  	<!-- 상품등록 -->
+  	<insert id="productRegist">
+  		insert into product(pname, imgurl, amount, price, description)
+  		values(#{pname}, #{imgurl}, #{amount}, #{price}, #{description})
+  	</insert>
+  	
+  	<!-- 상품조회 -->
+  	<select id="productList" resultType="com.green.uniform.dto.ProductDto">
+  		select * from product
+  	</select>
+  	
+  	<!-- 상품개별조회 -->
+  	<select id="productGetPcode" resultType="com.green.uniform.dto.ProductDto">
+  		select * from product where pcode = #{pcode}
+  	</select>
+  	
+  	<!-- 상품수정 -->
+  	<update id="productUpdate">
+  		UPDATE product SET pname = #{pname}, imgurl = #{imgurl}, amount = #{amount}, 
+  		price = #{price}, description = #{description} where pcode = #{pcode}
+  	</update>
+  	
+  	<delete id="productDelete">
+  		delete from product where pcode = #{pcode}
+  	</delete>
+  </mapper>
